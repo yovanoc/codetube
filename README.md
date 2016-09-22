@@ -10,5 +10,7 @@ Youtube Like in Laravel
 
 3/ run php artisan migrate
 
-4/ ALL DONE! :)
+4/ always keep running php artisan queue:work for jobs
+
+5/ ALL DONE! :)
 
