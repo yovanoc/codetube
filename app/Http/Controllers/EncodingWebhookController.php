@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
-use Illuminate\Http\Request;
-
 use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class EncodingWebhookController extends Controller
 {
@@ -20,23 +19,25 @@ class EncodingWebhookController extends Controller
 
     protected function videoEncoded(Request $request)
     {
-        $video = $this->getVideoByFileName($request->original_filename);
+        $video = $this->getVideoByFilename($request->original_filename);
 
         $video->processed = true;
         $video->video_id = $request->encoding_ids[0];
+
         $video->save();
     }
 
     protected function encodingProgress(Request $request)
     {
-        $video = $this->getVideoByFileName($request->original_filename);
+        $video = $this->getVideoByFilename($request->original_filename);
 
         $video->processed_percentage = $request->progress;
+
         $video->save();
     }
 
-    protected function getVideoByFileName($fileName)
+    protected function getVideoByFilename($filename)
     {
-        return Video::where('video_filename', $fileName)->firstOrFail();
+        return Video::where('video_filename', $filename)->firstOrFail();
     }
 }
