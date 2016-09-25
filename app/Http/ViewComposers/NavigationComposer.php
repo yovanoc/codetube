@@ -2,7 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class NavigationComposer

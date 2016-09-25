@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\UploadImage;
 use App\Models\Channel;
 use App\Http\Requests\ChannelUpdateRequest;
 
@@ -26,6 +27,12 @@ class ChannelSettingsController extends Controller
             'description' => $request->description
         ]);
 
-        return redirect()->to('/channel/'.$channel->slug.'/edit');
+        if ($file = $request->file('image')) {
+            $file->move(storage_path() . '/uploads', $fileId = uniqid(true));
+
+            $this->dispatch(new UploadImage($channel, $fileId));
+        }
+
+        return redirect()->to("/channel/{$channel->slug}/edit");
     }
 }

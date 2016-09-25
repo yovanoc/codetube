@@ -9,7 +9,7 @@
 
                     <div class="panel-body">
 
-                        <form action="{{ url('/channel/'. $channel->slug . '/edit') }}" method="post">
+                        <form action="{{ url('/channel/'. $channel->slug . '/edit') }}" method="post" enctype="multipart/form-data">
                             <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
                                 <label for="name">Name</label>
                                 <input type="text" id="name" name="name" class="form-control" value="{{ old('name') ? old('name') : $channel->name }}">
@@ -38,6 +38,11 @@
                                 @if ($errors->has('description'))
                                     <div class="help-block">{{ $errors->first('description') }}</div>
                                 @endif
+                            </div>
+
+                            <div class="form-group">
+                                <label for="image">Image</label>
+                                <input type="file" name="image" id="image">
                             </div>
 
                             <button class="btn btn-default" type="submit">Update</button>

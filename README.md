@@ -6,11 +6,11 @@ Youtube Like in Laravel
 
 -> Change necessary
 
-2/ run composer install && composer update
+2/ Run `composer install && composer update`
 
-3/ run php artisan migrate
+3/ Run `php artisan migrate`
 
-4/ always keep running php artisan queue:work for jobs
+4/ Always keep running `php artisan queue:work` for jobs
 
 5/ ALL DONE! :)
 

@@ -13,8 +13,9 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('video-upload', require('./components/VideoUpload.vue'));
 
 const app = new Vue({
-    el: 'body'
+    el: 'body',
+    data: window.codetube
 });
