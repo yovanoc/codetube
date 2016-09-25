@@ -22,6 +22,7 @@ Route::get('/home', 'HomeController@index');
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 
 Route::get('/videos/{video}', 'VideoController@show');
+Route::post('/videos/{video}/views', 'VideoViewController@create');
 
 Route::group(['middleware' => ['auth']], function () {
 

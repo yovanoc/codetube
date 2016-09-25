@@ -65,4 +65,42 @@ class Video extends Model
     {
         return (bool) $this->allow_comments;
     }
+
+    public function isPrivate()
+    {
+        return $this->visibility === 'private';
+    }
+
+    public function ownedByUser(User $user)
+    {
+        return $this->channel->user->id === $user->id;
+    }
+
+    public function canBeAccessed($user = null)
+    {
+        if (!$user && $this->isPrivate()) {
+            return false;
+        }
+
+        if ($user && $this->isPrivate() && ($user->id !== $this->channel->user_id)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public function getStreamUrl()
+    {
+        return config('codetube.buckets.videos') . '/' . $this->video_id . '.mp4';
+    }
+
+    public function views()
+    {
+        return $this->hasMany(VideoView::class);
+    }
+
+    public function viewCount()
+    {
+        return $this->views->count();
+    }
 }

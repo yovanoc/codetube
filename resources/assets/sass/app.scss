@@ -5,5 +5,11 @@
 // Variables
 @import "variables";
 
+// Components
+@import "components/video";
+
+// Vendor
+@import "vendor/videojs";
+
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
