@@ -38,6 +38,7 @@
 
                         <ul class="dropdown-menu" role="menu">
                             <li>
+                                <a href="{{ url('/videos') }}">Your videos</a>
                                 <a href="{{ url('/channel/' . $channel->slug) }}">Your channel</a>
                                 <a href="{{ url('/channel/' . $channel->slug . '/edit') }}">Channel settings</a>
 
