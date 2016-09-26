@@ -22,7 +22,10 @@ Route::get('/home', 'HomeController@index');
 Route::post('/webhook/encoding', 'EncodingWebhookController@handle');
 
 Route::get('/videos/{video}', 'VideoController@show');
+
 Route::post('/videos/{video}/views', 'VideoViewController@create');
+
+Route::get('/videos/{video}/votes', 'VideoVoteController@show');
 
 Route::get('/search', 'SearchController@index');
 
@@ -34,10 +37,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/videos', 'VideoController@index');
     Route::get('/videos/{video}/edit', 'VideoController@edit');
     Route::post('/videos', 'VideoController@store');
-    Route::delete('/videos/{video}', 'VideoController@delete');
+    Route::delete('/videos/{video}', 'VideoController@destroy');
     Route::put('/videos/{video}', 'VideoController@update');
 
     Route::get('/channel/{channel}/edit', 'ChannelSettingsController@edit');
     Route::put('/channel/{channel}/edit', 'ChannelSettingsController@update');
 
+    Route::post('videos/{video}/votes', 'VideoVoteController@create');
+    Route::delete('videos/{video}/votes', 'VideoVoteController@destroy');
 });

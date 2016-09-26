@@ -15,6 +15,7 @@ require('./bootstrap');
 
 Vue.component('video-upload', require('./components/VideoUpload.vue'));
 Vue.component('video-player', require('./components/VideoPlayer.vue'));
+Vue.component('video-voting', require('./components/VideoVoting.vue'));
 
 const app = new Vue({
     el: 'body',
