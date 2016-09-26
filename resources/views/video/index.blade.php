@@ -14,7 +14,7 @@
                                     <div class="row">
                                         <div class="col-sm-3">
                                             <a href="{{ url('/videos/' . $video->uid) }}">
-                                                <img src="{{ $video->getThumbnail() }}" alt="{{ $video->title }} thumbnail" class="img-responsive">
+                                                <img src="{{ $video->getThumbnail() }}" alt="{{ $video->title }} thumbnail" class="img-responsive img-rounded">
                                             </a>
                                         </div>
                                         <div class="col-sm-9">

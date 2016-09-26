@@ -9,7 +9,9 @@
         "laravel/framework": "5.3.*",
         "aws/aws-sdk-php": "^3.19",
         "league/flysystem-aws-s3-v3": "^1.0",
-        "intervention/image": "^2.3"
+        "intervention/image": "^2.3",
+        "algolia/algoliasearch-client-php": "^1.10",
+        "laravel/scout": "^1.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -41,7 +41,7 @@
                         <div class="media">
                             <div class="media-left">
                                 <a href="/channel/{{ $video->channel->slug }}">
-                                    <img src="{{ $video->channel->getImage() }}" alt="{{ $video->channel->name }} image">
+                                    <img src="{{ $video->channel->getImage() }}" alt="{{ $video->channel->name }} image" class="img-rounded">
                                 </a>
                             </div>
                             <div class="media-body">

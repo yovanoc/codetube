@@ -18,6 +18,16 @@
 
         <div class="collapse navbar-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
+            <form action="/search" method="get" class="navbar-form navbar-left" role="search">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search" value="{{ Request::get('q') }}">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-default" type="button">Go!</button>
+                          </span>
+                    </div>
+                </div>
+            </form>
             <ul class="nav navbar-nav">
                 &nbsp;
             </ul>

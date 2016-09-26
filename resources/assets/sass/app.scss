@@ -8,8 +8,8 @@
 // Components
 @import "components/video";
 
-// Vendor
-@import "vendor/videojs";
+// Videojs
+@import "node_modules/video.js/src/css/vjs";
 
 // Bootstrap
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
