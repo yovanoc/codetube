@@ -29,6 +29,8 @@ Route::get('/videos/{video}/votes', 'VideoVoteController@show');
 
 Route::get('/search', 'SearchController@index');
 
+Route::get('/videos/{video}/comments', 'VideoCommentController@index');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/upload', 'VideoUploadController@index');
@@ -45,4 +47,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('videos/{video}/votes', 'VideoVoteController@create');
     Route::delete('videos/{video}/votes', 'VideoVoteController@destroy');
+
+    Route::post('/videos/{video}/comments', 'VideoCommentController@create');
+    Route::delete('/videos/{video}/comments/{comment}', 'VideoCommentController@delete');
 });

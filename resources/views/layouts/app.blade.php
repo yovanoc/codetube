@@ -22,8 +22,8 @@
         window.codetube = {
             url: '{{ config('app.url') }}',
             user: {
-                id: '{{ Auth::check() ? Auth::id() : null }}',
-                authenticated: '{{ Auth::check() ? 'true' : 'false' }}',
+                id: {{ Auth::check() ? Auth::id() : 'null' }},
+                authenticated: {{ Auth::check() ? 'true' : 'false' }},
             }
         };
     </script>

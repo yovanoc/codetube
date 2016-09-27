@@ -31,7 +31,6 @@
                     this.up = response.json().data.up;
                     this.userVote = response.json().data.user_vote;
                     this.canVote = response.json().data.can_vote;
-                    console.log(response.json().data);
                 });
             },
 

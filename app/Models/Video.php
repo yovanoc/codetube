@@ -2,13 +2,14 @@
 
 namespace App\Models;
 
+use App\Traits\Orderable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 class Video extends Model
 {
-    use Searchable, SoftDeletes;
+    use Searchable, SoftDeletes, Orderable;
 
     protected $fillable = [
         'title',
@@ -31,11 +32,6 @@ class Video extends Model
     public function getRouteKeyName()
     {
         return 'uid';
-    }
-
-    public function scopeLatestFirst($query)
-    {
-        return $query->orderBy('created_at', 'desc');
     }
 
     public function isProcessed()
@@ -123,5 +119,10 @@ class Video extends Model
     public function voteFromUser(User $user)
     {
         return $this->votes()->where('user_id', $user->id);
+    }
+
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable')->whereNull('reply_id');
     }
 }

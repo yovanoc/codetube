@@ -11,7 +11,8 @@
         "league/flysystem-aws-s3-v3": "^1.0",
         "intervention/image": "^2.3",
         "algolia/algoliasearch-client-php": "^1.10",
-        "laravel/scout": "^1.1"
+        "laravel/scout": "^1.1",
+        "spatie/laravel-fractal": "^1.9"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -43,4 +43,13 @@ class VideoPolicy
 
         return $video->votesAllowed();
     }
+
+    public function comment(User $user, Video $video)
+    {
+        if (!$video->canBeAccessed($user)) {
+            return false;
+        }
+
+        return $video->commentsAllowed();
+    }
 }

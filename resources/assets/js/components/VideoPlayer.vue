@@ -5,8 +5,8 @@
             controls
             preload="auto"
             data-setup='{"fluid": true, "preload": "auto"}'
-            v-bind:poster="thumbnailUrl">
-        <source type="video/mp4" v-bind:src="videoUrl"></source>
+            :poster="thumbnailUrl">
+        <source type="video/mp4" :src="videoUrl"></source>
     </video>
 </template>
 
@@ -31,7 +31,7 @@
                     return false;
                 }
 
-                return Math.round(this.player.currentTime()) === Math.round((10 * this.duration) / 100);
+                return Math.round(this.player.currentTime()) === Math.round((50 * this.duration) / 100);
             },
             createView () {
                 this.$http.post('/videos/' + this.videoUid + '/views');
