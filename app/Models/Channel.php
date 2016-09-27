@@ -34,4 +34,14 @@ class Channel extends Model
 
         return config('codetube.buckets.images') . '/profile/' . $this->image_filename;
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function subscriptionCount()
+    {
+        return $this->subscriptions->count();
+    }
 }

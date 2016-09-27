@@ -48,7 +48,7 @@
                             </div>
                             <div class="media-body">
                                 <a href="/channel/{{ $video->channel->slug }}" class="media-heading">{{ $video->channel->name }}</a>
-                                Subscribe Button
+                                <subscribe-button channel-slug="{{ $video->channel->slug }}"></subscribe-button>
                             </div>
                         </div>
                     </div>

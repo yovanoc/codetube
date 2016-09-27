@@ -31,6 +31,8 @@ Route::get('/search', 'SearchController@index');
 
 Route::get('/videos/{video}/comments', 'VideoCommentController@index');
 
+Route::get('/subscription/{channel}', 'ChannelSubscriptionController@show');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/upload', 'VideoUploadController@index');
@@ -50,4 +52,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::post('/videos/{video}/comments', 'VideoCommentController@create');
     Route::delete('/videos/{video}/comments/{comment}', 'VideoCommentController@delete');
+
+    Route::post('/subscription/{channel}', 'ChannelSubscriptionController@create');
+    Route::delete('/subscription/{channel}', 'ChannelSubscriptionController@delete');
 });
