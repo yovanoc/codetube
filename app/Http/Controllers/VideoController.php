@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\VideoCreateRequest;
 use App\Http\Requests\VideoUpdateRequest;
 use App\Models\Video;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class VideoController extends Controller
         ]);
     }
 
-    public function store(VideoUpdateRequest $request)
+    public function store(VideoCreateRequest $request)
     {
         $uid = uniqid(true);
 
@@ -55,7 +56,7 @@ class VideoController extends Controller
         ]);
     }
 
-    public function update(Request $request, Video $video)
+    public function update(VideoUpdateRequest $request, Video $video)
     {
         $this->authorize('update', $video);
 
@@ -74,7 +75,7 @@ class VideoController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(Video $video)
+    public function delete(Video $video)
     {
         $this->authorize('delete', $video);
 

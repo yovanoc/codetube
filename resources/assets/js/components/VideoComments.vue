@@ -19,8 +19,8 @@
                 <a href="/channel/{{ comment.channel.data.slug }}">{{ comment.channel.data.name }}</a> {{ comment.created_at_human }}
                 <p>{{ comment.body }}</p>
 
-                <ul class="list-inline">
-                    <li v-if="$root.user.authenticated">
+                <ul class="list-inline" v-if="$root.user.authenticated">
+                    <li>
                         <a href="#" @click.prevent="toggleReplyForm(comment.id)">{{ replyFormVisible === comment.id ? 'Cancel' : 'Reply' }}</a>
                     </li>
                     <li>
@@ -45,7 +45,7 @@
                         <a href="/channel/{{ reply.channel.data.slug }}">{{ reply.channel.data.name }}</a> {{ reply.created_at_human }}
                         <p>{{ reply.body }}</p>
 
-                        <ul class="list-inline">
+                        <ul class="list-inline" v-if="$root.user.authenticated">
                             <li>
                                 <a href="#" v-if="$root.user.id === reply.user_id" @click.prevent="deleteComment(reply.id)">Delete</a>
                             </li>
@@ -94,8 +94,9 @@
                     reply_id: commentId
                 }).then((response) => {
                     this.comments.map((comment, index) => {
-                        if (comment.id == commentId) {
+                        if (comment.id === commentId) {
                             this.comments[index].replies.data.push(response.json().data);
+                            return;
                         }
                     });
 
@@ -131,13 +132,13 @@
 
             deleteById (commentId) {
                 this.comments.map((comment, index) => {
-                    if (comment.id == commentId) {
+                    if (comment.id === commentId) {
                         this.comments.splice(index, 1);
                         return;
                     }
 
                     comment.replies.data.map((reply, replyIndex) => {
-                        if (reply.id == commentId) {
+                        if (reply.id === commentId) {
                             this.comments[index].replies.data.splice(replyIndex, 1);
                             return;
                         }

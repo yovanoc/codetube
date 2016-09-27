@@ -33,6 +33,8 @@ Route::get('/videos/{video}/comments', 'VideoCommentController@index');
 
 Route::get('/subscription/{channel}', 'ChannelSubscriptionController@show');
 
+Route::get('/channel/{channel}', 'ChannelController@show');
+
 Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/upload', 'VideoUploadController@index');
@@ -41,14 +43,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/videos', 'VideoController@index');
     Route::get('/videos/{video}/edit', 'VideoController@edit');
     Route::post('/videos', 'VideoController@store');
-    Route::delete('/videos/{video}', 'VideoController@destroy');
+    Route::delete('/videos/{video}', 'VideoController@delete');
     Route::put('/videos/{video}', 'VideoController@update');
 
     Route::get('/channel/{channel}/edit', 'ChannelSettingsController@edit');
     Route::put('/channel/{channel}/edit', 'ChannelSettingsController@update');
 
     Route::post('videos/{video}/votes', 'VideoVoteController@create');
-    Route::delete('videos/{video}/votes', 'VideoVoteController@destroy');
+    Route::delete('videos/{video}/votes', 'VideoVoteController@delete');
 
     Route::post('/videos/{video}/comments', 'VideoCommentController@create');
     Route::delete('/videos/{video}/comments/{comment}', 'VideoCommentController@delete');

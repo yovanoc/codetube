@@ -22,7 +22,7 @@ class VideoVoteController extends Controller
         return response()->json(null, 200);
     }
 
-    public function destroy(Request $request, Video $video)
+    public function delete(Request $request, Video $video)
     {
         $this->authorize('vote', $video);
 

@@ -32,7 +32,7 @@
                                 <label for="visibility">Visibility</label>
                                 <select class="form-control" name="visibility" id="visibility">
                                     @foreach(['public', 'unlisted', 'private'] as $visibility)
-                                        <option value="{{ $visibility }}" {{ $video->$visibility == $visibility ? ' selected="selected"' : '' }}>{{ ucfirst($visibility) }}</option>
+                                        <option value="{{ $visibility }}" {{ $video->$visibility == $visibility ? 'selected="selected"' : '' }}>{{ ucfirst($visibility) }}</option>
                                     @endforeach
                                 </select>
 
@@ -43,13 +43,13 @@
 
                             <div class="form-group">
                                 <label for="allow_votes">
-                                    <input type="checkbox" name="allow_votes" id="allow_votes" {{ $video->votesAllowed() ? ' checked="checked"' : '' }}> Allow votes
+                                    <input type="checkbox" name="allow_votes" id="allow_votes" {{ $video->votesAllowed() ? 'checked="checked"' : '' }}> Allow votes
                                 </label>
                             </div>
 
                             <div class="form-group">
                                 <label for="allow_comments">
-                                    <input type="checkbox" name="allow_comments" id="allow_comments" {{ $video->commentsAllowed() ? ' checked="checked"' : '' }}> Allow comments
+                                    <input type="checkbox" name="allow_comments" id="allow_comments" {{ $video->commentsAllowed() ? 'checked="checked"' : '' }}> Allow comments
                                 </label>
                             </div>
 

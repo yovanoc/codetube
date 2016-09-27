@@ -1,5 +1,5 @@
 <template>
-    <div class=".video__voting">
+    <div class=".video__voting" v-if="canVote">
         <a href="#" class="video__voting-button" :class="{'video__voting-button--voted': userVote == 'up'}" @click.prevent="vote('up')">
             <span class="glyphicon glyphicon-thumbs-up"></span>
         </a> {{ up }} &nbsp;

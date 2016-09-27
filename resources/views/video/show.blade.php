@@ -31,13 +31,20 @@
 
                 <div class="panel panel-default">
                     <div class="panel-body">
-                        <h4>{{ $video->title }}</h4>
+                        <div class="panel-heading">
+                            <h3>{{ $video->title }} <small>{{ $video->created_at->toDateTimeString() }}</small></h3>
+                        </div>
                         <div class="pull-right">
                             <div class="video__views">
                                 {{ $video->viewCount() }} {{ str_plural('view', $video->viewCount()) }}
                             </div>
 
-                            <video-voting video-uid="{{ $video->uid }}"></video-voting>
+                            @if($video->votesAllowed())
+                                <video-voting video-uid="{{ $video->uid }}"></video-voting>
+                            @else
+                                <p>Votes are disabled for this video.</p>
+                            @endif
+
                         </div>
 
                         <div class="media">

@@ -8,7 +8,13 @@
                 <div class="panel-heading">Dashboard</div>
 
                 <div class="panel-body">
-                    You are logged in!
+                    @if($subscriptionVideos->count())
+                        @foreach($subscriptionVideos as $video)
+                            <div class="well">
+                                @include('$video.partials._video_result', ['video' => $video])
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>

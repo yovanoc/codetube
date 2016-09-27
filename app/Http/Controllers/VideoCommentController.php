@@ -41,12 +41,17 @@ class VideoCommentController extends Controller
 
         return response()->json(
             fractal()->item($comment)
-                ->parseIncludes(['channel'])
+                ->parseIncludes(['channel', 'replies'])
                 ->transformWith(new CommentTransformer())
                 ->toArray()
         );
     }
 
+    /**
+     * @param Video $video
+     * @param Comment $comment
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function delete(Video $video, Comment $comment)
     {
         $this->authorize('delete', $comment);

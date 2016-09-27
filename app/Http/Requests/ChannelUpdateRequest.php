@@ -31,4 +31,11 @@ class ChannelUpdateRequest extends FormRequest
             'description' => 'max:1000'
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'slug.unique' => 'This unique url has already been taken.'
+        ];
+    }
 }
