@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests;
 use App\Jobs\UploadVideo;
 use Illuminate\Http\Request;
 
 class VideoUploadController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        return view('video.upload');
+        return view('videos.upload');
     }
 
     public function store(Request $request)
@@ -21,9 +25,7 @@ class VideoUploadController extends Controller
 
         $request->file('video')->move(storage_path() . '/uploads', $video->video_filename);
 
-        $this->dispatch(new UploadVideo(
-            $video->video_filename
-        ));
+        $this->dispatch(new UploadVideo($video->video_filename));
 
         return response()->json(null, 200);
     }

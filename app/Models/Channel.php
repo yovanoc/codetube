@@ -9,16 +9,21 @@ class Channel extends Model
 {
     use Searchable;
 
-    protected $fillable = array('name', 'slug', 'description', 'image_filename');
-
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+        'image_filename'
+    ];
 
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function videos()
@@ -49,4 +54,5 @@ class Channel extends Model
     {
         return $this->hasManyThrough(VideoView::class, Video::class)->count();
     }
+
 }

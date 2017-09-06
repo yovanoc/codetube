@@ -2,23 +2,24 @@
 
 namespace App\Jobs;
 
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Storage;
+use File;
 
 class UploadVideo implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $filename;
 
     /**
      * Create a new job instance.
      *
-     * @param $filename
+     * @return void
      */
     public function __construct($filename)
     {
@@ -33,7 +34,7 @@ class UploadVideo implements ShouldQueue
     public function handle()
     {
         $file = storage_path() . '/uploads/' . $this->filename;
-
+        
         if (Storage::disk('s3drop')->put($this->filename, fopen($file, 'r+'))) {
             File::delete($file);
         }

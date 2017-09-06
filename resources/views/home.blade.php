@@ -14,6 +14,8 @@
                                 @include('$video.partials._video_result', ['video' => $video])
                             </div>
                         @endforeach
+                    @else
+                        <p>You have to follow some users with videos to have an activity feed.</p>
                     @endif
                 </div>
             </div>

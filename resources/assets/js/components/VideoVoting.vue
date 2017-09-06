@@ -25,41 +25,42 @@
         methods: {
 
             getVotes () {
-                this.$http.get('/videos/' + this.videoUid + '/votes').then((response) => {
-                    this.up = response.json().data.up;
-                    this.down = response.json().data.down;
-                    this.up = response.json().data.up;
-                    this.userVote = response.json().data.user_vote;
-                    this.canVote = response.json().data.can_vote;
-                });
+                axios.get('/videos/' + this.videoUid + '/votes')
+                .then((response) => {
+                    this.up = response.data.up
+                    this.down = response.data.down
+                    this.up = response.data.up
+                    this.userVote = response.data.user_vote
+                    this.canVote = response.data.can_vote
+                })
             },
 
             vote (type) {
                 if (this.userVote == type) {
-                    this[type]--;
-                    this.userVote = null;
-                    this.deleteVote(type);
-                    return;
+                    this[type]--
+                    this.userVote = null
+                    this.deleteVote(type)
+                    return
                 }
 
                 if (this.userVote) {
-                    this[type == 'up' ? 'down' : 'up']--;
+                    this[type == 'up' ? 'down' : 'up']--
                 }
 
-                this[type]++;
-                this.userVote = type;
+                this[type]++
+                this.userVote = type
 
-                this.createVote(type);
+                this.createVote(type)
             },
 
             deleteVote (type) {
-                this.$http.delete('/videos/' + this.videoUid + '/votes');
+                axios.delete('/videos/' + this.videoUid + '/votes')
             },
 
             createVote (type) {
-                this.$http.post('/videos/' + this.videoUid + '/votes', {
+                axios.post('/videos/' + this.videoUid + '/votes', {
                     type: type
-                });
+                })
             }
 
         },
@@ -68,7 +69,7 @@
             videoUid: null
         },
 
-        ready () {
+        mounted () {
             this.getVotes()
         }
     }

@@ -2,8 +2,7 @@
 
 namespace App\Policies;
 
-use App\Models\Comment;
-use App\Models\User;
+use App\Models\{Comment, User};
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class CommentPolicy
@@ -13,6 +12,7 @@ class CommentPolicy
     /**
      * Create a new policy instance.
      *
+     * @return void
      */
     public function __construct()
     {

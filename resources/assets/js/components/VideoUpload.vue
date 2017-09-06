@@ -12,7 +12,10 @@
 
                         <div id="video-form" v-if="uploading && !failed">
                             <div class="alert alert-info" v-if="!uploadingComplete">
-                                Your video will be available at <a href="{{ $root.url }}/videos/{{ uid }}" target="_blank">{{ $root.url }}/videos/{{ uid }}</a>.
+                                Your video will be available at
+                                <a :href="$root.url + '/videos/' + uid" target="_blank">
+                                    {{ $root.url }}/videos/{{ uid }}
+                                </a>.
                             </div>
 
                             <div class="alert alert-success" v-if="uploadingComplete">
@@ -68,70 +71,66 @@
                 fileProgress: 0
             }
         },
+
         methods: {
+
             fileInputChange() {
-                this.uploading = true;
-                this.failed = false;
+                this.uploading = true
+                this.failed = false
+                this.file = document.getElementById('video').files[0]
+                this.store()
+                .then(() => {
 
-                this.file = document.getElementById('video').files[0];
+                    var form = new FormData()
+                    form.append('video', this.file)
+                    form.append('uid', this.uid)
 
-                this.store().then(() => {
-                    var form = new FormData();
-
-                    form.append('video', this.file);
-                    form.append('uid', this.uid);
-
-                    this.$http.post('/upload', form, {
-                        progress: (e) => {
+                    var self = this
+                    axios.post('/upload', form, {
+                        onUploadProgress: function (e) {
                             if (e.lengthComputable) {
-                                this.updateProgress(e)
+                                self.updateProgress(e)
                             }
-                        }
-                    }).then(() => {
-                        this.uploadingComplete = true
-                    }, () => {
-                        this.failed = true
-                    });
-                }, () => {
-                    this.failed = true
+                         }
+                    })
+                    .then(() => this.uploadingComplete = true)
+                    .catch(() => this.failed = true)
                 })
             },
+
             store() {
-                return this.$http.post('/videos', {
+                return axios.post('/videos', {
                     title: this.title,
                     description: this.description,
                     visibility: this.visibility,
                     extension: this.file.name.split('.').pop()
-                }).then((response) => {
-                    this.uid = response.json().data.uid;
-                });
+                })
+                .then(response => this.uid = response.data.uid)
             },
-            update() {
-                this.saveStatus = 'Saving changes.';
 
-                return this.$http.put('/videos/' + this.uid, {
+            update() {
+                this.saveStatus = 'Saving changes.'
+                return axios.put('/videos/' + this.uid, {
                     title: this.title,
                     description: this.description,
                     visibility: this.visibility
-                }).then((response) => {
-                    this.saveStatus = 'Changes saved.';
-
-                    setTimeout(() => {
-                        this.saveStatus = null
-                    }, 3000)
-                }, () => {
-                    this.saveStatus = 'Failed to save changes.';
-                });
+                })
+                .then((response) => {
+                    this.saveStatus = 'Changes saved.'
+                    setTimeout(() => this.saveStatus = null, 3000)
+                })
+                .catch(() => this.saveStatus = 'Failed to save changes.')
             },
+
             updateProgress (e) {
-                e.percent = (e.loaded / e.total) * 100;
-                this.fileProgress = e.percent;
+                this.fileProgress = (e.loaded / e.total) * 100
             }
         },
-        ready() {
+
+        mounted() {
             window.onbeforeunload = () => {
                 if (this.uploading && !this.uploadingComplete && !this.failed) {
-                    return 'Are you sure you want to navigate away?';
+                    return 'Are you sure you want to navigate away?'
                 }
             }
         }

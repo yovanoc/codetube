@@ -2,18 +2,19 @@
 
 namespace App\Jobs;
 
-use Illuminate\Support\Facades\File;
-use Intervention\Image\Facades\Image;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Channel;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Foundation\Bus\Dispatchable;
+use Storage;
+use File;
+use Image;
 
 class UploadImage implements ShouldQueue
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public $channel;
 
@@ -22,8 +23,7 @@ class UploadImage implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param Channel $channel
-     * @param $fileId
+     * @return void
      */
     public function __construct(Channel $channel, $fileId)
     {
@@ -38,7 +38,6 @@ class UploadImage implements ShouldQueue
      */
     public function handle()
     {
-
         $path = storage_path() . '/uploads/' . $this->fileId;
         $fileName = $this->fileId . '.png';
 
@@ -46,7 +45,7 @@ class UploadImage implements ShouldQueue
             $c->upsize();
         })->save();
 
-        if (Storage::disk('s3images')->put('profile/' . $fileName, fopen($path, 'r+'))) {
+        if (Storage::disk('s3images')->put('profile/' . $fileName, fopen($path, 'r+'), 'public')) {
             File::delete($path);
         }
 

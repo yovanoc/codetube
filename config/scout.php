@@ -41,7 +41,23 @@ return [
     |
     */
 
-    'queue' => true,
+    'queue' => env('SCOUT_QUEUE', false),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Chuck Sizes
+    |--------------------------------------------------------------------------
+    |
+    | These options allow you to control the maximum chunk size when you are
+    | mass importing data into the search engine. This allows you to fine
+    | tune these chunk sizes based on the capabilites of your machines.
+    |
+    */
+
+    'chunk' => [
+        'searchable' => 500,
+        'unsearchable' => 500,
+    ],
 
     /*
     |--------------------------------------------------------------------------
@@ -57,27 +73,6 @@ return [
     'algolia' => [
         'id' => env('ALGOLIA_APP_ID', ''),
         'secret' => env('ALGOLIA_SECRET', ''),
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Elasticsearch Configuration
-    |--------------------------------------------------------------------------
-    |
-    | Here you may configure your settings for Elasticsearch, which is a
-    | distributed, open source search and analytics engine. Feel free
-    | to add as many Elasticsearch servers as required by your app.
-    |
-    */
-
-    'elasticsearch' => [
-        'index' => env('ELASTICSEARCH_INDEX', 'laravel'),
-
-        'config' => [
-            'hosts' => [
-                env('ELASTICSEARCH_HOST')
-            ],
-        ],
     ],
 
 ];

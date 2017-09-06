@@ -3,13 +3,12 @@
 namespace App\Models;
 
 use App\Traits\Orderable;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\{Model, SoftDeletes};
 use Laravel\Scout\Searchable;
 
 class Video extends Model
 {
-    use Searchable, SoftDeletes, Orderable;
+    use Orderable, Searchable, SoftDeletes;
 
     protected $fillable = [
         'title',
@@ -27,9 +26,7 @@ class Video extends Model
     public function toSearchableArray()
     {
         $properties = $this->toArray();
-
         $properties['visible'] = $this->isProcessed() && $this->isPublic();
-
         return $properties;
     }
 
@@ -99,7 +96,6 @@ class Video extends Model
 
         return true;
     }
-
     public function getStreamUrl()
     {
         return config('codetube.buckets.videos') . '/' . $this->video_id . '.mp4';
@@ -132,7 +128,7 @@ class Video extends Model
 
     public function voteFromUser(User $user)
     {
-        return $this->votes->where('user_id', $user->id);
+        return $this->votes()->where('user_id', $user->id);
     }
 
     public function comments()

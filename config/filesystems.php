@@ -8,14 +8,12 @@ return [
     |--------------------------------------------------------------------------
     |
     | Here you may specify the default filesystem disk that should be used
-    | by the framework. A "local" driver, as well as a variety of cloud
-    | based drivers are available for your choosing. Just store away!
-    |
-    | Supported: "local", "ftp", "s3", "rackspace"
+    | by the framework. The "local" disk, as well as a variety of cloud
+    | based disks are available to your application. Just store away!
     |
     */
 
-    'default' => 'local',
+    'default' => env('FILESYSTEM_DRIVER', 'local'),
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +26,7 @@ return [
     |
     */
 
-    'cloud' => 's3',
+    'cloud' => env('FILESYSTEM_CLOUD', 's3'),
 
     /*
     |--------------------------------------------------------------------------
@@ -38,6 +36,8 @@ return [
     | Here you may configure as many filesystem "disks" as you wish, and you
     | may even configure multiple disks of the same driver. Defaults have
     | been setup for each driver as an example of the required options.
+    |
+    | Supported Drivers: "local", "ftp", "s3", "rackspace"
     |
     */
 
@@ -51,23 +51,38 @@ return [
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
+            'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
+        ],
+
+        'ftp' => [
+            'driver'   => 'ftp',
+            'host'     => 'home592550434.1and1-data.host',
+            'username' => 'u82269480',
+            'password' => 'Ad2js9cr4!!',
+
+            // Optional FTP Settings...
+            // 'port'     => 21,
+            // 'root'     => '',
+            // 'passive'  => true,
+            // 'ssl'      => true,
+            'timeout'  => 30,
         ],
 
         's3drop' => [
             'driver' => 's3',
-            'key' => env('S3_KEY'),
-            'secret' => env('S3_SECRET'),
-            'region' => env('S3_REGION'),
-            'bucket' => env('S3_DROP_BUCKET'),
+            'key' => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'region' => env('AWS_REGION'),
+            'bucket' => env('AWS_DROP_BUCKET'),
         ],
 
         's3images' => [
             'driver' => 's3',
-            'key' => env('S3_KEY'),
-            'secret' => env('S3_SECRET'),
-            'region' => env('S3_REGION'),
-            'bucket' => env('S3_IMAGES_BUCKET'),
+            'key' => env('AWS_KEY'),
+            'secret' => env('AWS_SECRET'),
+            'region' => env('AWS_REGION'),
+            'bucket' => env('AWS_IMAGES_BUCKET'),
         ],
 
     ],

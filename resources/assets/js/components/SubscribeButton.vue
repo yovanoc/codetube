@@ -1,6 +1,6 @@
 <template>
     <div v-if="subscribers !== null">
-        {{ subscribers }} {{ subscribers | pluralize 'subscriber' }} &nbsp;
+        {{ pluralize(this.subscribers, 'subscriber') }} &nbsp;
         <button class="btn btn-xs btn-default" type="button" v-if="canSubscribe" @click.prevent="handle">{{ userSubscribed ? 'UnSubscribe' : 'Subscribe' }}</button>
     </div>
 </template>
@@ -21,39 +21,49 @@
         },
 
         methods: {
+            pluralize (count, word) {
+              if (count === 0) {
+                return '0 ' + word + 's'
+              } else if (count === 1) {
+                return '1 ' + word
+              } else {
+                return count + ' ' + word + 's'
+              }
+            },
+
             getSubscriptionStatus () {
-                this.$http.get('/subscription/' + this.channelSlug).then((response) => {
-                    this.subscribers = response.json().data.count;
-                    this.userSubscribed = response.json().data.user_subscribed;
-                    this.canSubscribe = response.json().data.can_subscribe;
-                });
+                axios.get('/subscription/' + this.channelSlug).then((response) => {
+                    this.subscribers = response.data.count
+                    this.userSubscribed = response.data.user_subscribed
+                    this.canSubscribe = response.data.can_subscribe
+                })
             },
 
             handle () {
                 if (this.userSubscribed) {
-                    this.unSubscribe();
+                    this.unSubscribe()
                 } else {
-                    this.subscribe();
+                    this.subscribe()
                 }
             },
 
             subscribe () {
-                this.userSubscribed = true;
-                this.subscribers++;
+                this.userSubscribed = true
+                this.subscribers++
 
-                this.$http.post('/subscription/' + this.channelSlug);
+                axios.post('/subscription/' + this.channelSlug)
             },
 
             unSubscribe () {
-                this.userSubscribed = false;
-                this.subscribers--;
+                this.userSubscribed = false
+                this.subscribers--
 
-                this.$http.delete('/subscription/' + this.channelSlug);
+                axios.delete('/subscription/' + this.channelSlug)
             }
         },
 
-        ready () {
-            this.getSubscriptionStatus();
+        mounted () {
+            this.getSubscriptionStatus()
         }
     }
 </script>

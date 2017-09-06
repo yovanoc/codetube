@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class VideoVoteController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth')->except('show');
+    }
+
     public function create(CreateVoteRequest $request, Video $video)
     {
         $this->authorize('vote', $video);
@@ -46,13 +56,10 @@ class VideoVoteController extends Controller
         }
 
         if ($request->user()) {
-
             $voteFromUser = $video->voteFromUser($request->user())->first();
             $response['user_vote'] = $voteFromUser ? $voteFromUser->type : null;
         }
 
-        return response()->json([
-            'data' => $response
-        ], 200);
+        return response()->json($response, 200);
     }
 }

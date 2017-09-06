@@ -11,8 +11,6 @@
 </template>
 
 <script>
-    import videojs from "video.js";
-
     export default {
         data () {
             return {
@@ -34,11 +32,14 @@
                 return Math.round(this.player.currentTime()) === Math.round((50 * this.duration) / 100);
             },
             createView () {
-                this.$http.post('/videos/' + this.videoUid + '/views');
+                axios.post('/videos/' + this.videoUid + '/views');
             }
         },
-        ready () {
+
+        mounted () {
             this.player = videojs('video')
+
+            this.player.ads()
 
             this.player.on('loadedmetadata', () => {
                 this.duration = Math.round(this.player.duration());

@@ -14,12 +14,12 @@
                                 @foreach($channels as $channel)
                                     <div class="media">
                                         <div class="media-left">
-                                            <a href="/channel/{{ $channel->slug }}">
+                                            <a href="/channels/{{ $channel->slug }}">
                                                 <img src="{{ $channel->getImage() }}" alt="{{ $channel->name }} image" class="media-object img-rounded">
                                             </a>
                                         </div>
                                         <div class="media-body">
-                                            <a href="/channel/{{ $channel->slug }}" class="media-heading">{{ $channel->name }}</a>
+                                            <a href="/channels/{{ $channel->slug }}" class="media-heading">{{ $channel->name }}</a>
 
                                             <ul class="list-inline">
                                                 <li>{{ $channel->subscriptionCount() }} {{ str_plural('subscriber', $channel->subscriptionCount()) }}</li>

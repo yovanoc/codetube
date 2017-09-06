@@ -1,39 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles -->
-    <link href="{{ url('/css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="http://vjs.zencdn.net/6.2.5/video-js.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.min.css">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-    <!-- Scripts -->
     <script>
-        window.Laravel = <?php echo json_encode([
-            'csrfToken' => csrf_token(),
-        ]); ?>
-
-        window.codetube = {
-            url: '{{ config('app.url') }}',
-            user: {
-                id: {{ Auth::check() ? Auth::id() : 'null' }},
-                authenticated: {{ Auth::check() ? 'true' : 'false' }},
-            }
-        };
+    window.codetube = {
+        url: '{{ config('app.url') }}',
+        user: {
+            id: {{ Auth::check() ? Auth::id() : 'null' }},
+            authenticated: {{ Auth::check() ? 'true' : 'false' }},
+        }
+    }
     </script>
 </head>
 <body>
-    @include('layouts.partials._navigation')
+    <div id="app">
+        @include('layouts.partials._navigation')
+        @yield('content')
+    </div>
 
-    @yield('content')
-
-    <!-- Scripts -->
-    <script src="{{ url('/js/app.js') }}"></script>
+    <script src="http://vjs.zencdn.net/6.2.5/video.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

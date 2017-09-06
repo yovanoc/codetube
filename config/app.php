@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Codetube',
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'timezone' => 'Europe/Paris',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,10 +167,6 @@ return [
          * Package Service Providers...
          */
 
-        Intervention\Image\ImageServiceProvider::class,
-        Laravel\Scout\ScoutServiceProvider::class,
-        Spatie\Fractal\FractalServiceProvider::class,
-
         /*
          * Application Service Providers...
          */
@@ -179,8 +175,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        App\Providers\ComposerServiceProvider::class,
+        App\Providers\ViewComposerServiceProvider::class,
 
     ],
 
@@ -201,6 +196,7 @@ return [
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
         'Blade' => Illuminate\Support\Facades\Blade::class,
+        'Broadcast' => Illuminate\Support\Facades\Broadcast::class,
         'Bus' => Illuminate\Support\Facades\Bus::class,
         'Cache' => Illuminate\Support\Facades\Cache::class,
         'Config' => Illuminate\Support\Facades\Config::class,
@@ -229,9 +225,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        'Image' => Intervention\Image\Facades\Image::class,
-        'Fractal' => Spatie\Fractal\FractalFacade::class,
 
     ],
 
