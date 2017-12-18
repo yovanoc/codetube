@@ -9,8 +9,8 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <link rel="stylesheet" href="http://vjs.zencdn.net/6.2.5/video-js.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.6.0/video-js.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.min.css">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     <script>
@@ -29,8 +29,8 @@
         @yield('content')
     </div>
 
-    <script src="http://vjs.zencdn.net/6.2.5/video.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.0.3/videojs.ads.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/video.js/6.6.0/video.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/videojs-contrib-ads/5.1.5/videojs.ads.min.js"></script>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>

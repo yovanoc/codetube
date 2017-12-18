@@ -49,12 +49,12 @@
 
                         <div class="media">
                             <div class="media-left">
-                                <a href="/channel/{{ $video->channel->slug }}">
+                                <a href="/channels/{{ $video->channel->slug }}">
                                     <img src="{{ $video->channel->getImage() }}" alt="{{ $video->channel->name }} image" class="img-rounded">
                                 </a>
                             </div>
                             <div class="media-body">
-                                <a href="/channel/{{ $video->channel->slug }}" class="media-heading">{{ $video->channel->name }}</a>
+                                <a href="/channels/{{ $video->channel->slug }}" class="media-heading">{{ $video->channel->name }}</a>
                                 <subscribe-button channel-slug="{{ $video->channel->slug }}"></subscribe-button>
                             </div>
                         </div>
