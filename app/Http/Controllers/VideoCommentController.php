@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateVideoCommentRequest;
-use App\Models\{Comment, Video};
+use App\Models\Comment;
+use App\Models\Video;
 use App\Transformers\CommentTransformer;
 use Illuminate\Http\Request;
 

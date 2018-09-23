@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\{Video, VideoView};
+use App\Models\Video;
+use App\Models\VideoView;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 

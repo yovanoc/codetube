@@ -64,7 +64,7 @@
                 @if($video->description)
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            {!! nl2br(e($video->description)) !!}
+                            {!! nl2br(e($video->description, false)) !!}
                         </div>
                     </div>
                 @endif

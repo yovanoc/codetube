@@ -3,7 +3,8 @@
 namespace App\Models;
 
 use App\Traits\Orderable;
-use Illuminate\Database\Eloquent\{Model, SoftDeletes};
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Scout\Searchable;
 
 class Video extends Model
