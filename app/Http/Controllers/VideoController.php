@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Video;
 use Illuminate\Http\Request;
-use App\Http\Requests\{
-  VideoCreateRequest,
-  VideoUpdateRequest
-};
+use App\Http\Requests\VideoCreateRequest;
+use App\Http\Requests\VideoUpdateRequest;
 
 class VideoController extends Controller
 {

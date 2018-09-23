@@ -54,5 +54,4 @@ class Channel extends Model
     {
         return $this->hasManyThrough(VideoView::class, Video::class)->count();
     }
-
 }

@@ -2,7 +2,8 @@
 
 namespace App\Policies;
 
-use App\Models\{Channel, User};
+use App\Models\Channel;
+use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
 class ChannelPolicy
