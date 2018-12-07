@@ -34,7 +34,7 @@
                             @if($videos->count())
                                 @foreach($videos as $video)
                                     <div class="well">
-                                        @include('video.partials._video_result', ['video' => $video])
+                                        @include('videos.partials._video_result', ['video' => $video])
                                     </div>
                                 @endforeach
                             @else
